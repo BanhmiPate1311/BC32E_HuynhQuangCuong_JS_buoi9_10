@@ -378,7 +378,7 @@ document.querySelector("#btnTimNV").onclick = function () {
       <tr>
           <td colspan="8">Khum tồn tại người như thế này nha</td>          
       </tr>
-  `;
+      `;
     } else {
       renderTableNhanVien(mangNhanVien);
     }
