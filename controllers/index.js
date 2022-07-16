@@ -1,3 +1,5 @@
+document.addEventListener("contextmenu", (event) => event.preventDefault()); //Khóa chuột
+
 var mangNhanVien = []; // [{},{},{}];
 
 //Gọi hàm lấy localstorage khi trang vừa load
