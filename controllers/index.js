@@ -1,3 +1,5 @@
+document.addEventListener("contextmenu", (event) => event.preventDefault()); //Khóa chuột
+
 var mangNhanVien = []; // [{},{},{}];
 
 //Gọi hàm lấy localstorage khi trang vừa load
@@ -371,7 +373,7 @@ document.querySelector("#btnTimNV").onclick = function () {
     }
   }
   if (mangNVSearch.length === 0) {
-    if (loaiNVSearch !== "Chọn loại nhân viên") {
+    if (loaiNVSearch !== "Tất cả nhân viên") {
       document.querySelector("#tableDanhSach").innerHTML = `
       <tr>
           <td colspan="8">Khum tồn tại người như thế này nha</td>          
