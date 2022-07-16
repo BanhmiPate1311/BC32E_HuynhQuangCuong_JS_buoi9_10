@@ -386,13 +386,3 @@ document.querySelector("#btnTimNV").onclick = function () {
     renderTableNhanVien(mangNVSearch);
   }
 };
-
-function Pet(food, drink) {
-  this.drink = drink;
-  this.food = food;
-}
-Pet.prototype.getDetail = function () {
-  return "Food: " + this.food + "\n" + "Drink: " + this.drink;
-};
-const dog = new Pet("Fish", "Milk");
-console.log(dog.getDetail());
