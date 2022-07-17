@@ -1,7 +1,6 @@
 // document.addEventListener("contextmenu", (event) => event.preventDefault()); //Khóa chuột
 
 var mangNhanVien = []; // [{},{},{}];
-// document.querySelector("#SapXepGiam").style.display = "block";
 //Gọi hàm lấy localstorage khi trang vừa load
 window.onload = function () {
   //Browser vừa load lên làm gì thì sẽ code ở đây
@@ -27,35 +26,70 @@ function layLocalStorage() {
   }
 }
 
+function resetform() {
+  document.querySelector("#tknv").value = "";
+  document.querySelector("#name").value = "";
+  document.querySelector("#email").value = "";
+  document.querySelector("#password").value = "";
+  document.querySelector("#datepicker").value = "";
+  document.querySelector("#luongCB").value = "";
+  document.querySelector("#chucvu").value = "Chọn chức vụ";
+  document.querySelector("#gioLam").value = "";
+}
+
+function resetTb() {
+  document.querySelector("#tbTKNV").innerHTML = "";
+  document.querySelector("#tbTen").innerHTML = "";
+  document.querySelector("#tbEmail").innerHTML = "";
+  document.querySelector("#tbMatKhau").innerHTML = "";
+  document.querySelector("#tbNgay").innerHTML = "";
+  document.querySelector("#tbLuongCB").innerHTML = "";
+  document.querySelector("#tbChucVu").innerHTML = "";
+  document.querySelector("#tbGiolam").innerHTML = "";
+  document.querySelector("#tknv").style.borderColor = "#ced4da";
+  document.querySelector("#name").style.borderColor = "#ced4da";
+  document.querySelector("#email").style.borderColor = "#ced4da";
+  document.querySelector("#password").style.borderColor = "#ced4da";
+  document.querySelector("#datepicker").style.borderColor = "#ced4da";
+  document.querySelector("#luongCB").style.borderColor = "#ced4da";
+  document.querySelector("#chucvu").style.borderColor = "#ced4da";
+  document.querySelector("#gioLam").style.borderColor = "#ced4da";
+}
+
 /* ---------- Validation ---------- */
 const form = document.querySelector("#infor");
 
 form.addEventListener("input", function (e) {
   switch (e.target.id) {
     case "tknv":
-      checkTaiKhoan();
+      var valid = checkTaiKhoan();
       break;
     case "name":
-      checkHoTen();
+      var valid = checkHoTen();
       break;
     case "email":
-      checkEmail();
+      var valid = checkEmail();
       break;
     case "password":
-      checkPassword();
+      var valid = checkPassword();
       break;
     case "datepicker":
-      checkNgayLam();
+      var valid = checkNgayLam();
       break;
     case "luongCB":
-      checkLuongCB();
+      var valid = checkLuongCB();
       break;
     case "chucvu":
-      checkChucVu();
+      var valid = checkChucVu();
       break;
     case "gioLam":
-      checkGioLam();
+      var valid = checkGioLam();
       break;
+  }
+  if (!valid) {
+    document.querySelector("#" + e.target.id).style.borderColor = "#f44336";
+  } else {
+    document.getElementById(e.target.id).style.borderColor = "#ced4da";
   }
 });
 
@@ -130,6 +164,7 @@ function checkGioLam() {
   return valid;
 }
 
+//Xử lý button Them
 document.querySelector("#btnThem").onclick = function () {
   resetform();
   resetTb();
@@ -145,7 +180,6 @@ document.querySelector("#btnThemNV").onclick = function () {
   //input: thông tin nhân viên
   //Tạo đối tượng
   var nv = new NhanVien();
-  //   console.log(nv);
   //Mở lại nút tài khoản
   document.querySelector("#tknv").disabled = false;
   //Lấy thông tin input từ người dùng
@@ -155,12 +189,10 @@ document.querySelector("#btnThemNV").onclick = function () {
   nv.matKhau = document.querySelector("#password").value;
   nv.ngayLam = document.querySelector("#datepicker").value;
   // var ngayLam = document.querySelector("#datepicker").value;
-
   // nv.ngayLam = moment(ngayLam).format("DD/MM/YYYY");
   nv.luongCB = document.querySelector("#luongCB").value;
   nv.chucVu = document.querySelector("#chucvu").value;
   nv.gioLam = document.querySelector("#gioLam").value;
-  //   console.log(nv);
 
   //Kiểm tra dữ liệu nhân viên có hợp lệ hay không?
   var valid = true; // mặc định form là hợp lệ
@@ -190,28 +222,6 @@ document.querySelector("#btnThemNV").onclick = function () {
   resetform();
   document.querySelector("#btnThemNV").setAttribute("data-dismiss", "modal");
 };
-
-function resetform() {
-  document.querySelector("#tknv").value = "";
-  document.querySelector("#name").value = "";
-  document.querySelector("#email").value = "";
-  document.querySelector("#password").value = "";
-  document.querySelector("#datepicker").value = "";
-  document.querySelector("#luongCB").value = "";
-  document.querySelector("#chucvu").value = "Chọn chức vụ";
-  document.querySelector("#gioLam").value = "";
-}
-
-function resetTb() {
-  document.querySelector("#tbTKNV").innerHTML = "";
-  document.querySelector("#tbTen").innerHTML = "";
-  document.querySelector("#tbEmail").innerHTML = "";
-  document.querySelector("#tbMatKhau").innerHTML = "";
-  document.querySelector("#tbNgay").innerHTML = "";
-  document.querySelector("#tbLuongCB").innerHTML = "";
-  document.querySelector("#tbChucVu").innerHTML = "";
-  document.querySelector("#tbGiolam").innerHTML = "";
-}
 
 function renderTableNhanVien(arrNhanVien) {
   var html = "";

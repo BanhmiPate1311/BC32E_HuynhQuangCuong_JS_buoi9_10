@@ -49,12 +49,9 @@ function kiemTraDoDai(value, selectorError, name, minLength, maxLength) {
     document.querySelector(selectorError).innerHTML +=
       name + " từ " + minLength + " đến " + maxLength + " ký tự. ";
     document.querySelector(selectorError).style.display = "block";
-    document.querySelector("#tknv").style.borderColor = "red";
-    rgba(0, 0, 0, 0.2);
     return false;
   }
   document.querySelector(selectorError).innerHTML += "";
-  document.querySelector("#tknv").style.borderColor = "rgba(0,0,0,.2)";
   return true;
 }
 
