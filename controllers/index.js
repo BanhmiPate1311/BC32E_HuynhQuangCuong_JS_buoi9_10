@@ -371,8 +371,8 @@ document.querySelector("#btnCapNhat").onclick = function () {
 var mangNVSearch = [];
 //Chức năng search
 document.querySelector("#btnTimNV").onclick = function () {
-  document.querySelector("#SapXepTang").style.display = "block";
-  document.querySelector("#SapXepGiam").style.display = "block";
+  document.querySelector("#SapXepTang").style.display = "inline-block";
+  document.querySelector("#SapXepGiam").style.display = "inline-block";
   //Lấy giá trị search do người dùng chọn
   var loaiNVSearch = document.querySelector("#searchName").value;
   //Tạo mảng mới chứa danh sách nhân viên đã sắp xếp
@@ -402,7 +402,7 @@ document.querySelector("#btnTimNV").onclick = function () {
 
 document.querySelector("#SapXepTang").onclick = function () {
   document.querySelector("#SapXepTang").style.display = "none";
-  document.querySelector("#SapXepGiam").style.display = "block";
+  document.querySelector("#SapXepGiam").style.display = "inline-block";
   if (mangNVSearch.length === 0) {
     var mangClone = Array.from(mangNhanVien);
     sortUp(mangClone);
@@ -414,7 +414,7 @@ document.querySelector("#SapXepTang").onclick = function () {
 };
 
 document.querySelector("#SapXepGiam").onclick = function () {
-  document.querySelector("#SapXepTang").style.display = "block";
+  document.querySelector("#SapXepTang").style.display = "inline-block";
   document.querySelector("#SapXepGiam").style.display = "none";
   if (mangNVSearch.length === 0) {
     var mangClone = Array.from(mangNhanVien);
