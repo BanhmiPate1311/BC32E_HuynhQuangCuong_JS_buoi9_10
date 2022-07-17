@@ -1,7 +1,7 @@
-document.addEventListener("contextmenu", (event) => event.preventDefault()); //Khóa chuột
+// document.addEventListener("contextmenu", (event) => event.preventDefault()); //Khóa chuột
 
 var mangNhanVien = []; // [{},{},{}];
-
+// document.querySelector("#SapXepGiam").style.display = "block";
 //Gọi hàm lấy localstorage khi trang vừa load
 window.onload = function () {
   //Browser vừa load lên làm gì thì sẽ code ở đây
@@ -224,7 +224,7 @@ function renderTableNhanVien(arrNhanVien) {
     nv.tongLuong = function () {
       var tongLuong = 0;
       switch (this.chucVu) {
-        case "Sếp":
+        case "Giám đốc":
           tongLuong = Number(this.luongCB) * 3;
           break;
         case "Trưởng phòng":
@@ -283,7 +283,7 @@ function xoaNhanVien(taiKhoanClick) {
   //Gọi hàm tạo lại table sau khi xóa
   renderTableNhanVien(mangNhanVien);
   //Gọi hàm  lưu mảng nhân viên vào localstorage
-  // luuLocalStorage();
+  luuLocalStorage();
 }
 
 function chinhSua(taiKhoanClick) {
@@ -358,12 +358,15 @@ document.querySelector("#btnCapNhat").onclick = function () {
   luuLocalStorage();
 };
 
+var mangNVSearch = [];
 //Chức năng search
 document.querySelector("#btnTimNV").onclick = function () {
+  document.querySelector("#SapXepTang").style.display = "block";
+  document.querySelector("#SapXepGiam").style.display = "block";
   //Lấy giá trị search do người dùng chọn
   var loaiNVSearch = document.querySelector("#searchName").value;
-  //Tạo máng mới chưa danh sách nhân viên đã sắp xếp
-  var mangNVSearch = [];
+  //Tạo mảng mới chứa danh sách nhân viên đã sắp xếp
+  mangNVSearch = [];
   //Duyệt mảng nhân viên tìm nhân viên theo yêu cầu
   for (index = 0; index < mangNhanVien.length; index++) {
     var nv = mangNhanVien[index].loaiNhanVien();
@@ -373,16 +376,42 @@ document.querySelector("#btnTimNV").onclick = function () {
     }
   }
   if (mangNVSearch.length === 0) {
-    if (loaiNVSearch !== "Tất cả nhân viên") {
+    if (loaiNVSearch === "Tất cả nhân viên") {
+      renderTableNhanVien(mangNhanVien);
+    } else {
       document.querySelector("#tableDanhSach").innerHTML = `
       <tr>
           <td colspan="8">Khum tồn tại người như thế này nha</td>          
       </tr>
       `;
-    } else {
-      renderTableNhanVien(mangNhanVien);
     }
   } else {
+    renderTableNhanVien(mangNVSearch);
+  }
+};
+
+document.querySelector("#SapXepTang").onclick = function () {
+  document.querySelector("#SapXepTang").style.display = "none";
+  document.querySelector("#SapXepGiam").style.display = "block";
+  if (mangNVSearch.length === 0) {
+    var mangClone = Array.from(mangNhanVien);
+    sortUp(mangClone);
+    renderTableNhanVien(mangClone);
+  } else {
+    sortUp(mangNVSearch);
+    renderTableNhanVien(mangNVSearch);
+  }
+};
+
+document.querySelector("#SapXepGiam").onclick = function () {
+  document.querySelector("#SapXepTang").style.display = "block";
+  document.querySelector("#SapXepGiam").style.display = "none";
+  if (mangNVSearch.length === 0) {
+    var mangClone = Array.from(mangNhanVien);
+    sortDn(mangClone);
+    renderTableNhanVien(mangClone);
+  } else {
+    sortDn(mangNVSearch);
     renderTableNhanVien(mangNVSearch);
   }
 };

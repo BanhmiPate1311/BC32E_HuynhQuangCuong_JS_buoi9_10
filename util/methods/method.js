@@ -124,3 +124,29 @@ function kiemTraHopLe(value, selectorError, name) {
   // document.querySelector(selectorError).style.display = "none";
   return true;
 }
+
+function sortUp(arrNhanVien) {
+  arrNhanVien.sort((a, b) => {
+    var la = a.taiKhoan.toLowerCase();
+    var lb = b.taiKhoan.toLowerCase();
+    if (la < lb) {
+      return -1;
+    }
+    if (la > lb) {
+      return 1;
+    }
+  });
+}
+
+function sortDn(arrNhanVien) {
+  arrNhanVien.sort((a, b) => {
+    var la = a.taiKhoan.toLowerCase();
+    var lb = b.taiKhoan.toLowerCase();
+    if (la < lb) {
+      return 1;
+    }
+    if (la > lb) {
+      return -1;
+    }
+  });
+}

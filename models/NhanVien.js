@@ -13,7 +13,7 @@ function NhanVien() {
   this.tongLuong = function () {
     var tongLuong = 0;
     switch (this.chucVu) {
-      case "Sếp":
+      case "Giám đốc":
         tongLuong = Number(this.luongCB) * 3;
         break;
       case "Trưởng phòng":
